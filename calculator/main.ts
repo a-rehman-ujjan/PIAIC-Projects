@@ -1,40 +1,44 @@
-import { sub } from "./operations/sub.js";
+import { numbers } from "./numbers.js";
+import { operator } from "./operator.js";
 import { add } from "./operations/add.js";
 import { div } from "./operations/div.js";
 import { prod } from "./operations/prod.js";
-import { numbers } from "./numbers.js";
-import { operator } from "./operator.js";
+import { sub } from "./operations/sub.js";
 import inquirer from "inquirer";
 
 let again = "";
+
 do{
-    let n = await numbers()
-let op = await operator()
+    let n = await numbers();
+let op = await operator();
 let a = n.num1
 let b = n.num2
 let o = op.operator
 
-// console.log(a, b, o)
-let ans: number = 0;
+let answer: number = 0;
 if(o == "+"){
-    ans = add(a, b);
+    answer = add(a, b);
 }else if(o == "-"){
-    ans = sub(a, b);
-}else if(o == "*"){
-    ans = prod(a, b);
-}else if(o == "/"){
-    ans = div(a, b);
+    answer = sub(a, b)
 }
-console.log(ans)
-const repeat = async ()=>{ 
-    let c = inquirer.prompt([{
+else if(o == "*"){
+    answer = prod(a, b)
+}
+else if(o == "/"){
+    answer = div(a, b)
+}
+console.log(answer)
+const repeat = async ()=>{
+    let c = await inquirer.prompt([{
         name: "repeat",
         type: "list",
-        choices: ["yes", "no"]
+        message: "would you like to Repeat",
+        choices: ["yes","no"]
     }])
-    return c
+    return c;
 }
-let re = await repeat()
-again = re.repeat
+let again = await repeat()
+console.log(again)
+
 
 }while(again !== "no")
