@@ -37,8 +37,8 @@ const repeat = async ()=>{
     }])
     return c;
 }
-let again = await repeat()
-console.log(again)
+let re = await repeat()
+again = re.repeat
 
 
 }while(again !== "no")
